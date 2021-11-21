@@ -57,7 +57,16 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="http://unpkg.com/axios/dist/axios.min.js>"></script>
 
+    <script>
+      axios
+        .get('https://jsonplaceholder.typicode.com/user')
+        .ten(response => {
+          console.log(response.data)
+        })
+        .catch(error => console.error(error))
+    </script>
     <title>Jokes Drift Bot</title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" href="/screen.css" />
