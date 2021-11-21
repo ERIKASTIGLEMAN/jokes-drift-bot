@@ -3,8 +3,9 @@
   "name": "jokes-drift-bot",
   "scripts": {
     "start": "browser-sync start --server public --files public",
-    "deploy": "echo 'To setup deployment run: npm run setup-deploy'",
-    "setup-deploy": "app-app --deploy && npm run deploy"
+    "deploy": "netlify deploy --prod --dir=public",
+    "setup-deploy": "app-app --deploy && npm run deploy",
+    "postdeploy": "echo 'Your site was deployed to https://jokes-drift-bot-erikastigleman.netlify.app'"
   },
   "prettier": {
     "trailingComma": "es5",
@@ -16,5 +17,9 @@
   },
   "devDependencies": {
     "prettier": "^2.4.1"
-  }
+  },
+  "dependencies": {
+    "axios": "^0.24.0"
+  },
+  "homepage": "https://jokes-drift-bot-erikastigleman.netlify.app"
 }
