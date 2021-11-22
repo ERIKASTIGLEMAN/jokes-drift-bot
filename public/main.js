@@ -1,6 +1,4 @@
 const getBtn = () => {
-  debugger
-
   return document.getElementById('btn')
 }
 
