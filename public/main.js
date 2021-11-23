@@ -10,9 +10,6 @@ const getData = () => {
       },
     })
     .then(response => {
-      //console.log(response)
-      //console.log(response.data)
-      //console.log(response.data.joke)
       document.querySelector('#dadJokes').textContent = response.data.joke
     })
 }
