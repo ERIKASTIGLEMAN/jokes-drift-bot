@@ -12,8 +12,8 @@ const getData = () => {
     })
     .then(response => {
       mulberry = response.data.joke
-      console.log(mulberry)
-      //return mulberry
+
+      return mulberry
     })
     .then(receiveJoke)
 }
