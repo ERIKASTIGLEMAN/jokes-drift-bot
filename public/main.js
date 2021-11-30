@@ -1,8 +1,8 @@
-const getBtn = () => {
-  return document.getElementById('btn')
-}
+let xhr = new XMLHttpRequest()
+
 var conversationId = ''
 var mulberry = ''
+
 const getData = () => {
   axios
     .get('https://icanhazdadjoke.com/', {
@@ -12,12 +12,10 @@ const getData = () => {
     })
     .then(response => {
       mulberry = response.data.joke
-
-      return mulberry
+      console.log(mulberry)
     })
-    .then(receiveJoke)
 }
-const receiveJoke = function (message) {
+/*const receiveJoke = function (message) {
   let request_arg = {
     method: 'POST',
     url: `https://driftapi.com/v1/conversations/${conversationId}/messages`,
@@ -34,55 +32,23 @@ const receiveJoke = function (message) {
       ],
     },
   }
-  return Promise.resolve(request_arg)
-  /*.then(() => {
-    console.log(mulberry)
-    return {
-      type: 'chat',
-     ,
-    }
-  })*/
-}
-
-/*const receiveJoke = () => {
-  console.log('amanda is tired')
-  let XHR = new XMLHttpRequest()
-  XHR.addEventListener('load', function (event) {
-    console.log('Success')
-  })
-  axios
-    .post(`https://driftapi.com/conversations/${conversationId}/messages`, {
-      type: 'mulberry',
-      body: mulberry,
-    })
-    .then(response => {
-      return response()
-    })
-    .then({
-      data: {
-        messages: [
-          {
-            conversationId: conversationId,
-            body: mulberry,
-          },
-        ],
-      },
-    })
 }*/
+const sendMessage = (conversationId, mulberry) => {
+  xhr.open(
+    'POST',
+    `https://driftapi.com/v1/conversations/${conversationId}/messages`
+  ),
+    {
+      'Content-Type': 'application/json',
+    }
 
-function main() {
-  if (document.querySelector('#btn')) {
-    getBtn().addEventListener('click', getData)
-  }
+  xhr.send(mulberry)
 }
 
-//
-document.addEventListener('DOMContentLoaded', main)
-//drift.on('startConversation', test)
-drift.on('message:sent', getData)
-
+drift.on('message:sent', sendMessage)
+drift.on('startConversation', getData)
 drift.on('startConversation', function (data) {
   conversationId = data.conversationId
 })
-
-//drift.on('message:sent', receiveJoke)
+//
+//document.addEventListener('DOMContentLoaded', main)
