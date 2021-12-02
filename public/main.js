@@ -1,8 +1,9 @@
+//global variables
 let xhr = new XMLHttpRequest()
-
 var conversationId = ''
 var mulberry = ''
 
+//function/ method GET from API
 const getData = () => {
   axios
     .get('https://icanhazdadjoke.com/', {
@@ -15,24 +16,8 @@ const getData = () => {
       console.log(mulberry)
     })
 }
-/*const receiveJoke = function (message) {
-  let request_arg = {
-    method: 'POST',
-    url: `https://driftapi.com/v1/conversations/${conversationId}/messages`,
-    json: true,
-    headers: {
-      'User-Agent': 'request',
-    },
-    data: {
-      messages: [
-        {
-          conversationId: conversationId,
-          body: mulberry,
-        },
-      ],
-    },
-  }
-}*/
+
+//POST to Drift - CORS error causing POST to fail
 const sendMessage = (conversationId, mulberry) => {
   xhr.open(
     'POST',
@@ -45,10 +30,10 @@ const sendMessage = (conversationId, mulberry) => {
   xhr.send(mulberry)
 }
 
+//Event Listeners
+//drift.on('button:click', sendMessage)
 drift.on('message:sent', sendMessage)
 drift.on('startConversation', getData)
 drift.on('startConversation', function (data) {
   conversationId = data.conversationId
 })
-//
-//document.addEventListener('DOMContentLoaded', main)
